@@ -8,4 +8,5 @@ urlpatterns = [
     path('categorias/', views.CategoriaView.as_view()),
     path('categorias/<int:id>', views.CategoriaView.as_view()),
     path('categorias-apiview/', views.CategoriaList.as_view()),
+    path('categoria-detail-apiview/<int:id>', views.CategoriaDetail.as_view()),
 ]
