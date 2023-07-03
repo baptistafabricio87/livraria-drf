@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "livraria"
+version = "0.1.0"
+description = ""
+authors = ["Fabricio Castro <baptistafabricio87@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+Django = "^4.2"
+djangorestframework = "^3.14.0"
+gunicorn = "^20.1.0"
+whitenoise = "^6.4.0"
+
+[tool.poetry.dev-dependencies]
+ignr = "^2.2"
+isort = "^5.12.0"
+blue = "^0.9.1"
+
+[tool.poetry.group.dev.dependencies]
+ignr = "^2.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
