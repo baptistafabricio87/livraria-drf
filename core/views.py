@@ -8,6 +8,8 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.serializers import ModelSerializer
 from rest_framework.views import APIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.viewsets import ModelViewSet
 
 from core.models import Categoria
 
@@ -50,12 +52,14 @@ class CategoriaView(View):
         return JsonResponse(data)
 
 
+# Serializer
 class CategoriaSerializer(ModelSerializer):
     class Meta:
         model = Categoria
         fields = '__all__'
 
 
+# API View
 class CategoriaList(APIView):
     def get(self, request):
         categorias = Categoria.objects.all()
@@ -91,3 +95,21 @@ class CategoriaDetail(APIView):
         categoria = get_object_or_404(Categoria.objects.all(), id=id)
         categoria.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+# Generics API View
+class CategoriaListGenericAPIView(ListCreateAPIView):
+    queryset = Categoria.objects.all()
+    serializer_class = CategoriaSerializer
+
+
+class CategoriaDetailGenericAPIView(RetrieveUpdateDestroyAPIView):
+    lookup_field = 'id'
+    queryset = Categoria.objects.all()
+    serializer_class = CategoriaSerializer
+
+
+# ViewSets
+class CategoriaViewSet(ModelViewSet):
+    queryset = Categoria.objects.all()
+    serializer_class = CategoriaSerializer
