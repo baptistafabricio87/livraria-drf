@@ -6,7 +6,10 @@ from core import views
 from rest_framework import routers
 
 router = routers.DefaultRouter()
-router.register(r'categoria-viewset', viewset=views.CategoriaViewSet)
+
+router.register(r'categorias', views.CategoriaViewSet)
+router.register(r'editoras', views.EditoraViewSet)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
