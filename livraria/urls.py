@@ -7,9 +7,9 @@ from rest_framework import routers
 
 router = routers.DefaultRouter()
 
+router.register(r'autores', viewset=views.AutorViewSet)
 router.register(r'categorias', viewset=views.CategoriaViewSet)
 router.register(r'editoras', viewset=views.EditoraViewSet)
-router.register(r'autores', viewset=views.AutorViewSet)
 router.register(r'livros', viewset=views.LivroViewSet)
 
 urlpatterns = [

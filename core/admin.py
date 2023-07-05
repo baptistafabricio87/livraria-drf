@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from core.models import Autor, Categoria, Compra, Editora, ItensCompra, Livro
 
 # Register your models here.
