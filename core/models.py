@@ -42,7 +42,7 @@ class Livro(models.Model):
     autores = models.ManyToManyField(Autor, related_name='livros')
 
     def __str__(self):
-        return f'{self.titulo} ({self.editora}) {self.autores.get(livros__autores=self.id)}'
+        return f'{self.titulo} ({self.editora})'
 
 
 class Compra(models.Model):
