@@ -1,11 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # Create your models here.
-
-
 class Autor(models.Model):
-
     nome = models.CharField(max_length=255)
 
     class Meta:
@@ -67,7 +65,6 @@ class Compra(models.Model):
 
 
 class ItensCompra(models.Model):
-
     compra = models.ForeignKey(Compra, on_delete=models.CASCADE, related_name='itens')
     livro = models.ForeignKey(Livro, on_delete=models.PROTECT, related_name='+')
     quantidade = models.IntegerField(default=1)
