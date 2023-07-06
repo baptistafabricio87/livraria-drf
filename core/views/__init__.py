@@ -6,5 +6,6 @@ from .categoriaGenericAPIView import (
     CategoriaDetailGenericAPIView,
     CategoriaListGenericAPIView,
 )
+from .compra import CompraViewSet
 from .editora import EditoraViewSet
 from .livro import LivroViewSet

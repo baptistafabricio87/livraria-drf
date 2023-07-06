@@ -2,17 +2,21 @@ from django.contrib import admin
 
 from core.models import Autor, Categoria, Compra, Editora, ItensCompra, Livro
 
+
 # Register your models here.
-admin.site.register(Autor)
-admin.site.register(Categoria)
-admin.site.register(Editora)
-admin.site.register(Livro)
-
-
 class ItensInline(admin.TabularInline):
     model = ItensCompra
 
 
-@admin.register(Compra)
-class CompraAdmin(admin.ModelAdmin):
-    inlines = (ItensInline,)
+class MyAdminSite(admin.AdminSite, admin.ModelAdmin):
+    site_title = 'Livraria DRF'
+    site_header = 'Livraria'
+
+
+admin_site = MyAdminSite()
+
+admin_site.register(Autor)
+admin_site.register(Categoria)
+admin_site.register(Editora)
+admin_site.register(Livro)
+admin_site.register(Compra, inlines=(ItensInline,))

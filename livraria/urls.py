@@ -1,9 +1,12 @@
-from django.contrib import admin
+# from django.contrib import admin
+# from django.contrib.auth.models import User
 from django.urls import path, include
 
 from core import views
 
 from rest_framework import routers
+
+from core.admin import admin_site
 
 router = routers.DefaultRouter()
 
@@ -11,9 +14,11 @@ router.register(r'autores', viewset=views.AutorViewSet)
 router.register(r'categorias', viewset=views.CategoriaViewSet)
 router.register(r'editoras', viewset=views.EditoraViewSet)
 router.register(r'livros', viewset=views.LivroViewSet)
+router.register(r'compras', viewset=views.CompraViewSet)
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin_site.urls),
     path('', include(router.urls))
 ]
 

@@ -47,13 +47,13 @@ class Livro(models.Model):
 
 class Compra(models.Model):
     class StatusCompra(models.IntegerChoices):
-        CARRINHO = 1, 'Carrinho'
-        REALIZADO = 2, 'Realizado'
-        PAGO = 3, 'Pago'
-        ENTREGUE = 4, 'Entregue'
+        CARRINHO = 1, 'CARRINHO'
+        REALIZADO = 2, 'REALIZADO'
+        PAGO = 3, 'PAGO'
+        ENTREGUE = 4, 'ENTREGUE'
 
     usuario = models.ForeignKey(
-        User, on_delete=models.PROTECT, related_name='compras'
+        User, on_delete=models.PROTECT, default=True, related_name='compras'
     )
     status = models.IntegerField(
         choices=StatusCompra.choices,

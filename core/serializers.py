@@ -4,7 +4,7 @@ from rest_framework.serializers import (
     SerializerMethodField,
 )
 
-from core.models import Autor, Categoria, Editora, Livro
+from core.models import Autor, Categoria, Editora, Livro, Compra
 
 
 class CategoriaSerializer(ModelSerializer):
@@ -54,3 +54,11 @@ class LivroDetailSerializer(ModelSerializer):
         for autor in autores:
             nomes_autores.append(autor.nome)
         return nomes_autores
+
+
+class CompraSerializer(ModelSerializer):
+    usuario = CharField(source='usuario.email')
+
+    class Meta:
+        model = Compra
+        fields = '__all__'
