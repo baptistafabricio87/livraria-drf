@@ -4,7 +4,7 @@ from rest_framework.serializers import (
     SerializerMethodField,
 )
 
-from core.models import Autor, Categoria, Editora, Livro, Compra
+from core.models import Autor, Categoria, Editora, Livro, Compra, ItensCompra
 
 
 class CategoriaSerializer(ModelSerializer):
@@ -39,26 +39,44 @@ class LivroSerializer(ModelSerializer):
 
 # Representação de campos aninhados
 class LivroDetailSerializer(ModelSerializer):
-    categoria = CharField(source='categoria.descricao')
-    editora = EditoraNestedSerializer()
-    autores = SerializerMethodField()
+    # categoria = CharField(source='categoria.descricao')
+    # editora = EditoraNestedSerializer()
+    # autores = SerializerMethodField()
 
     class Meta:
         model = Livro
         fields = '__all__'
         depth = 1
 
-    def get_autores(self, instance):
-        nomes_autores = []
-        autores = instance.autores.get_queryset()
-        for autor in autores:
-            nomes_autores.append(autor.nome)
-        return nomes_autores
+    # def get_autores(self, instance):
+    #     nomes_autores = []
+    #     autores = instance.autores.get_queryset()
+    #     for autor in autores:
+    #         nomes_autores.append(autor.nome)
+    #     return nomes_autores
+
+
+class ItensCompraSerializer(ModelSerializer):
+    total = SerializerMethodField()
+
+    def get_total(self, instance):
+        return instance.quantidade * instance.livro.preco
+
+    class Meta:
+        model = ItensCompra
+        fields = ('livro', 'quantidade', 'total',)
+        depth = 1
 
 
 class CompraSerializer(ModelSerializer):
     usuario = CharField(source='usuario.email')
+    status = SerializerMethodField()
+    itens = ItensCompraSerializer(many=True)
 
     class Meta:
         model = Compra
-        fields = '__all__'
+        fields = ('id', 'usuario', 'status', 'itens', 'total',)
+
+    # Pode ser utilizado objects ou instance
+    def get_status(self, instance):
+        return instance.get_status_display()

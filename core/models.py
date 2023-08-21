@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models import F
 
 
 # Create your models here.
@@ -62,6 +63,13 @@ class Compra(models.Model):
 
     def __str__(self):
         return f' {self.usuario} ( {self.status} )'
+
+    @property
+    def total(self):
+        queryset = self.itens.all().aggregate(
+            total=models.Sum(F('quantidade') * F('livro__preco'))
+        )
+        return queryset['total']
 
 
 class ItensCompra(models.Model):

@@ -12,9 +12,9 @@ router = routers.DefaultRouter()
 
 router.register(r'autores', viewset=views.AutorViewSet)
 router.register(r'categorias', viewset=views.CategoriaViewSet)
+router.register(r'compras', viewset=views.CompraViewSet)
 router.register(r'editoras', viewset=views.EditoraViewSet)
 router.register(r'livros', viewset=views.LivroViewSet)
-router.register(r'compras', viewset=views.CompraViewSet)
 
 
 urlpatterns = [
